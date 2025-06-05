@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NGO Registration</title>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; }
+    header, footer { background: #1a237e; color: white; text-align: center; padding: 20px; }
+    section { padding: 30px; }
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .price { color: #388e3c; font-size: 20px; margin: 10px 0; }
+    input[type="email"] {
+      width: 90%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .btn {
+      background: #1a237e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .btn:hover {
+      background: #3949ab;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>NGO Registration</h1>
+  <p>Choose a Package Below</p>
+</header>
+
+<section>
+  <!-- Silver Package -->
+  <div class="card">
+    <h2>Silver Package</h2>
+    <p>Name Reservation, CAC Filing</p>
+    <p class="price">₦70,000</p>
+    <input type="email" id="email1" placeholder="Enter your email" />
+    <button class="btn" onclick="window.open('https://wa.me/yourphonenumber', '_blank')">WhatsApp Me</button>
+    <button class="btn" onclick="payWithPaystack('email1', 70000)">Pay Now</button>
+  </div>
+
+  <!-- Gold Package -->
+  <div class="card">
+    <h2>Gold Package</h2>
+    <p>Silver + TIN + Constitution Draft</p>
+    <p class="price">₦85,000</p>
+    <input type="email" id="email2" placeholder="Enter your email" />
+    <button class="btn" onclick="window.open('https://wa.me/yourphonenumber', '_blank')">WhatsApp Me</button>
+    <button class="btn" onclick="payWithPaystack('email2', 85000)">Pay Now</button>
+  </div>
+
+  <!-- Diamond Package -->
+  <div class="card">
+    <h2>Diamond Package</h2>
+    <p>Gold + Website + NGO Branding Kit</p>
+    <p class="price">₦120,000</p>
+    <input type="email" id="email3" placeholder="Enter your email" />
+    <button class="btn" onclick="window.open('https://wa.me/yourphonenumber', '_blank')">WhatsApp Me</button>
+    <button class="btn" onclick="payWithPaystack('email3', 120000)">Pay Now</button>
+    
+
+  </div>
+</section>
+
+<footer>
+  <p>Need help? <a href="https://wa.me/2348123456789" style="color: #fff;">Chat on WhatsApp</a></p>
+</footer>
+
+<script>
+function payWithPaystack(emailFieldId, amount) {
+  var email = document.getElementById(emailFieldId).value;
+  if (!email) {
+    alert("Please enter your email");
+    return;
+  }
+
+  var handler = PaystackPop.setup({
+    key: 'pk_test_xxxxxxxxxxxxxxxxxxxxx', // Replace with your public key
+    email: email,
+    amount: amount * 100,
+    currency: 'NGN',
+    ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+    callback: function(response){
+      alert('Payment complete! Reference: ' + response.reference);
+      window.location.href = "https://wa.me/2348123456789?text=Hi,%20I%20just%20paid%20for%20an%20NGO%20Registration%20package.%20Reference:%20" + response.reference;
+    },
+    onClose: function(){
+      alert('Transaction was cancelled');
+    }
+  });
+  handler.openIframe();
+}
+</script>
+
+</body>
+</html>
