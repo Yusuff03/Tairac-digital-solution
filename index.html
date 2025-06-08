@@ -27,10 +27,32 @@
       padding: 20px;
       margin-top: 30px;
     }
+    #welcome-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1a237e;
+  color: white;
+  padding: 20px 40px;
+  border-radius: 8px;
+  font-size: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+#welcome-popup.hide {
+  opacity: 0;
+  pointer-events: none;
+}
   </style>
 </head>
 <body>
-
+<div id="welcome-popup">
+  <p>Welcome to <strong>TAIRAC-DIGITAL-SOLUTION</strong>!</p>
+</div>
+  
 <header>
   <h1 style="color: white;">Tairac Digital Solution</h1>
   <h3 style="color: white;">CAC Registration Made Easy</h2>
